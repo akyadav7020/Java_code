@@ -1,0 +1,58 @@
+//Square Root of a number without math function.
+
+import java.util.* ;
+
+public class Main
+{
+	public static double mid_root(double n , double low, double high)
+	{
+	   double i = (low + high)/2;
+	   double res = 0;
+	   double precesion = 0.0000001;
+	   if(i*i == n)  res = i;  
+	   else if (i*i > n)
+	   {
+	       if ((i*i -n) < precesion) res = i;
+	       else
+	       {
+	        low = low;
+	        high =i;
+	        res = mid_root(n,low,high);
+	       }
+	   }
+	   else 
+	   {
+	       if ((n-i*i) < precesion) res = i;
+	       else
+	       {
+	        low =i;
+	        high = high;
+	        res = mid_root(n,low,high);
+	       }
+	   }
+	   return res;
+	}
+	public static double root(double n)
+	{   
+	    double sqrt_root =0;
+	    double low =0; double high = n;
+	    for (double i=low;i<high;i++){
+	    if (i*i ==n) 
+	    {sqrt_root = i; break;}
+	    if(i*i > n) 
+	    {
+	       low = i-1;
+	       high = i;
+	       sqrt_root = mid_root(n,low,high);
+	       break;
+	    }
+	    }
+	    return sqrt_root;
+	}
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		double n = sc.nextDouble();
+		double res = root(n);
+		System.out.println(res);
+	}
+}
